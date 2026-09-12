@@ -1,27 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Instrument Serif', Georgia, serif;
-  --font-body: 'Outfit', system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
 
-  --color-sky: #6ba3d6;
-  --color-sky-light: #e8f1fa;
-  --color-sky-50: #f4f8fc;
+  --color-accent: #3678e0;
+  --color-accent-light: #eef4fc;
 
-  --color-surface: #fafafa;
-  --color-surface-raised: #ffffff;
-  --color-surface-sunken: #f4f4f5;
+  --color-warm: #f59e42;
+  --color-warm-light: #fef5e7;
 
-  --color-ink: #09090b;
-  --color-ink-secondary: #71717a;
-  --color-ink-tertiary: #a1a1aa;
-  --color-ink-faint: #d4d4d8;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f7f8fa;
 
-  --color-weather-clear: #fef9ef;
-  --color-weather-fair: #f0f7fe;
-  --color-weather-cloudy: #f0f0f2;
-  --color-weather-rain: #e4e7ec;
-  --color-weather-storm: #d1d5de;
+  --color-ink: #1a1a2e;
+  --color-ink-2: #52526e;
+  --color-ink-3: #9494a8;
+  --color-ink-4: #d0d0da;
+
+  --color-weather-clear: #fef9ee;
+  --color-weather-fair: #eef4fc;
+  --color-weather-cloudy: #f2f3f7;
+  --color-weather-rain: #e6eaf2;
+  --color-weather-storm: #d5d8e3;
 }
 
 html {
@@ -36,6 +37,6 @@ body {
 }
 
 ::selection {
-  background: var(--color-sky);
+  background: var(--color-accent);
   color: white;
 }
