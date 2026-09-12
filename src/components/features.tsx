@@ -1,77 +1,69 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Eye, Zap, Calendar, Shield } from "lucide-react";
 
 const features = [
   {
-    icon: Eye,
-    title: "Instant Clarity",
+    number: "01",
+    title: "Instant clarity",
     description:
-      "Stop squinting at tiny calendar blocks. One look at your weather forecast tells you exactly how your day looks.",
-    gradient: "from-sunrise-400 to-sunrise-500",
+      "One glance tells you how your day looks. No more squinting at tiny calendar blocks to understand your load.",
   },
   {
-    icon: Zap,
-    title: "Smart Scoring",
+    number: "02",
+    title: "Smart scoring",
     description:
-      "Our algorithm weighs meeting count, duration, gaps, and back-to-backs to give each day an accurate weather score.",
-    gradient: "from-midday-400 to-midday-500",
+      "Weighs meeting count, duration, gaps between events, and back-to-back runs to score each day accurately.",
   },
   {
-    icon: Calendar,
-    title: "Calendar Sync",
+    number: "03",
+    title: "Calendar sync",
     description:
-      "Connect Google Calendar, Outlook, or Apple Calendar. Your weather updates in real-time as events change.",
-    gradient: "from-sunset-400 to-sunset-500",
+      "Connect Google Calendar, Outlook, or Apple Calendar. Weather updates in real-time as your schedule changes.",
   },
   {
-    icon: Shield,
-    title: "Private by Design",
+    number: "04",
+    title: "Private by design",
     description:
-      "We only read event times, not content. Your meeting details never leave your device.",
-    gradient: "from-night-400 to-night-500",
+      "We only read event times, never content. Your meeting details stay on your device.",
   },
 ];
 
 export function Features() {
   return (
-    <section id="features" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="features" className="py-24 sm:py-32">
+      <div className="max-w-5xl mx-auto px-6">
         <motion.div
-          className="text-center mb-16"
+          className="mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <p className="text-[11px] font-light tracking-wider text-ink-tertiary uppercase mb-4">
+            Features
+          </p>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl text-ink max-w-md">
             Weather you can plan around
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            A new way to understand your time. Built for people who are tired of
-            decoding packed calendars.
-          </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 gap-px bg-ink-faint/40">
           {features.map((feature, i) => (
             <motion.div
-              key={feature.title}
-              className="relative p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow group"
-              initial={{ opacity: 0, y: 20 }}
+              key={feature.number}
+              className="bg-surface p-8 sm:p-10"
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.08 }}
             >
-              <div
-                className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} text-white mb-4 group-hover:scale-110 transition-transform`}
-              >
-                <feature.icon size={24} />
-              </div>
-              <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-gray-900 mb-2">
+              <span className="text-[11px] font-light tracking-wider text-ink-tertiary">
+                {feature.number}
+              </span>
+              <h3 className="text-base font-medium text-ink mt-3 mb-3">
                 {feature.title}
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm font-light text-ink-secondary leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>

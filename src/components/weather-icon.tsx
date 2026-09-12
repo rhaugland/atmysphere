@@ -4,198 +4,86 @@ import { type WeatherType } from "@/lib/mock-data";
 
 interface WeatherIconProps {
   weather: WeatherType;
-  size?: "sm" | "md" | "lg" | "xl";
-  animated?: boolean;
+  size?: number;
+  className?: string;
 }
-
-const sizeMap = {
-  sm: 32,
-  md: 48,
-  lg: 72,
-  xl: 120,
-};
 
 export function WeatherIcon({
   weather,
-  size = "md",
-  animated = true,
+  size = 24,
+  className = "",
 }: WeatherIconProps) {
-  const px = sizeMap[size];
+  const stroke = "currentColor";
+  const sw = 1.5;
 
   return (
-    <div
-      className={`relative inline-flex items-center justify-center ${animated ? "animate-float" : ""}`}
-      style={{ width: px, height: px }}
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth={sw}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
     >
-      {weather === "sunny" && <SunIcon size={px} />}
-      {weather === "partly-cloudy" && <PartlyCloudyIcon size={px} />}
-      {weather === "cloudy" && <CloudyIcon size={px} />}
-      {weather === "rainy" && <RainyIcon size={px} />}
-      {weather === "stormy" && <StormyIcon size={px} />}
-    </div>
-  );
-}
+      {weather === "sunny" && (
+        <>
+          <circle cx="12" cy="12" r="4" stroke={stroke} />
+          <line x1="12" y1="2" x2="12" y2="5" stroke={stroke} />
+          <line x1="12" y1="19" x2="12" y2="22" stroke={stroke} />
+          <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" stroke={stroke} />
+          <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" stroke={stroke} />
+          <line x1="2" y1="12" x2="5" y2="12" stroke={stroke} />
+          <line x1="19" y1="12" x2="22" y2="12" stroke={stroke} />
+          <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" stroke={stroke} />
+          <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" stroke={stroke} />
+        </>
+      )}
 
-function SunIcon({ size }: { size: number }) {
-  const r = size * 0.25;
-  const center = size / 2;
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      {/* Rays */}
-      {Array.from({ length: 8 }).map((_, i) => {
-        const angle = (i * 45 * Math.PI) / 180;
-        const x1 = center + Math.cos(angle) * r * 1.4;
-        const y1 = center + Math.sin(angle) * r * 1.4;
-        const x2 = center + Math.cos(angle) * r * 1.9;
-        const y2 = center + Math.sin(angle) * r * 1.9;
-        return (
-          <line
-            key={i}
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y2}
-            stroke="#F97316"
-            strokeWidth={size * 0.04}
-            strokeLinecap="round"
-            className="animate-pulse-glow"
-            style={{ animationDelay: `${i * 0.15}s` }}
+      {weather === "partly-cloudy" && (
+        <>
+          <circle cx="15" cy="9" r="3" stroke={stroke} />
+          <line x1="15" y1="3" x2="15" y2="4.5" stroke={stroke} />
+          <line x1="21" y1="9" x2="22" y2="9" stroke={stroke} />
+          <line x1="19.24" y1="4.76" x2="18.18" y2="5.82" stroke={stroke} />
+          <path
+            d="M8 17h8a4 4 0 0 0 0-8h-.35A5.5 5.5 0 0 0 5 12.5V13a4 4 0 0 0 3 4z"
+            stroke={stroke}
           />
-        );
-      })}
-      {/* Sun body */}
-      <circle cx={center} cy={center} r={r} fill="#FB923C">
-        <animate
-          attributeName="r"
-          values={`${r};${r * 1.05};${r}`}
-          dur="3s"
-          repeatCount="indefinite"
-        />
-      </circle>
-      <circle cx={center} cy={center} r={r * 0.7} fill="#FDBA74" opacity="0.6" />
-    </svg>
-  );
-}
+        </>
+      )}
 
-function PartlyCloudyIcon({ size }: { size: number }) {
-  const center = size / 2;
-  const r = size * 0.15;
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      {/* Small sun peeking */}
-      <circle cx={center + size * 0.15} cy={center - size * 0.15} r={r} fill="#FB923C" />
-      {Array.from({ length: 5 }).map((_, i) => {
-        const angle = ((i * 72 - 90) * Math.PI) / 180;
-        const cx2 = center + size * 0.15 + Math.cos(angle) * r * 1.5;
-        const cy2 = center - size * 0.15 + Math.sin(angle) * r * 1.5;
-        return (
-          <line
-            key={i}
-            x1={center + size * 0.15 + Math.cos(angle) * r * 1.1}
-            y1={center - size * 0.15 + Math.sin(angle) * r * 1.1}
-            x2={cx2}
-            y2={cy2}
-            stroke="#FB923C"
-            strokeWidth={size * 0.03}
-            strokeLinecap="round"
+      {weather === "cloudy" && (
+        <path
+          d="M17 18H6a5 5 0 0 1-.93-9.91A7 7 0 0 1 17.83 11H18a4 4 0 0 1 0 8z"
+          stroke={stroke}
+        />
+      )}
+
+      {weather === "rainy" && (
+        <>
+          <path
+            d="M17 15H6a5 5 0 0 1-.93-9.91A7 7 0 0 1 17.83 8H18a4 4 0 0 1 0 8z"
+            stroke={stroke}
           />
-        );
-      })}
-      {/* Cloud */}
-      <ellipse cx={center - size * 0.05} cy={center + size * 0.05} rx={size * 0.28} ry={size * 0.15} fill="#E0F2FE" />
-      <ellipse cx={center - size * 0.15} cy={center - size * 0.02} rx={size * 0.15} ry={size * 0.13} fill="#BAE6FD" />
-      <ellipse cx={center + size * 0.05} cy={center - size * 0.04} rx={size * 0.18} ry={size * 0.14} fill="#E0F2FE" />
-    </svg>
-  );
-}
+          <line x1="8" y1="18" x2="7" y2="21" stroke={stroke} />
+          <line x1="12" y1="18" x2="11" y2="21" stroke={stroke} />
+          <line x1="16" y1="18" x2="15" y2="21" stroke={stroke} />
+        </>
+      )}
 
-function CloudyIcon({ size }: { size: number }) {
-  const center = size / 2;
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      <g className="animate-drift" style={{ animationDuration: "8s" }}>
-        <ellipse cx={center} cy={center + size * 0.05} rx={size * 0.32} ry={size * 0.16} fill="#BAE6FD" />
-        <ellipse cx={center - size * 0.12} cy={center - size * 0.05} rx={size * 0.18} ry={size * 0.15} fill="#E0F2FE" />
-        <ellipse cx={center + size * 0.1} cy={center - size * 0.08} rx={size * 0.2} ry={size * 0.16} fill="#E0F2FE" />
-        <ellipse cx={center} cy={center - size * 0.12} rx={size * 0.15} ry={size * 0.13} fill="#BAE6FD" />
-      </g>
-    </svg>
-  );
-}
-
-function RainyIcon({ size }: { size: number }) {
-  const center = size / 2;
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      {/* Cloud */}
-      <ellipse cx={center} cy={center - size * 0.05} rx={size * 0.3} ry={size * 0.14} fill="#94A3B8" />
-      <ellipse cx={center - size * 0.1} cy={center - size * 0.15} rx={size * 0.16} ry={size * 0.13} fill="#CBD5E1" />
-      <ellipse cx={center + size * 0.08} cy={center - size * 0.16} rx={size * 0.18} ry={size * 0.14} fill="#CBD5E1" />
-      {/* Rain drops */}
-      {[
-        { x: center - size * 0.15, delay: 0 },
-        { x: center - size * 0.05, delay: 0.3 },
-        { x: center + size * 0.05, delay: 0.15 },
-        { x: center + size * 0.15, delay: 0.45 },
-      ].map((drop, i) => (
-        <line
-          key={i}
-          x1={drop.x}
-          y1={center + size * 0.1}
-          x2={drop.x - size * 0.02}
-          y2={center + size * 0.22}
-          stroke="#38BDF8"
-          strokeWidth={size * 0.03}
-          strokeLinecap="round"
-          className="animate-rain"
-          style={{ animationDelay: `${drop.delay}s` }}
-        />
-      ))}
-    </svg>
-  );
-}
-
-function StormyIcon({ size }: { size: number }) {
-  const center = size / 2;
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      {/* Dark cloud */}
-      <ellipse cx={center} cy={center - size * 0.08} rx={size * 0.32} ry={size * 0.15} fill="#475569" />
-      <ellipse cx={center - size * 0.12} cy={center - size * 0.18} rx={size * 0.17} ry={size * 0.14} fill="#64748B" />
-      <ellipse cx={center + size * 0.1} cy={center - size * 0.2} rx={size * 0.19} ry={size * 0.15} fill="#64748B" />
-      {/* Lightning bolt */}
-      <polygon
-        points={`
-          ${center + size * 0.02},${center + size * 0.02}
-          ${center - size * 0.06},${center + size * 0.18}
-          ${center},${center + size * 0.16}
-          ${center - size * 0.03},${center + size * 0.32}
-          ${center + size * 0.1},${center + size * 0.12}
-          ${center + size * 0.04},${center + size * 0.14}
-        `}
-        fill="#FBBF24"
-        className="animate-pulse-glow"
-      />
-      {/* Rain drops */}
-      {[
-        { x: center - size * 0.18, delay: 0 },
-        { x: center - size * 0.1, delay: 0.2 },
-        { x: center + size * 0.15, delay: 0.1 },
-        { x: center + size * 0.22, delay: 0.35 },
-      ].map((drop, i) => (
-        <line
-          key={i}
-          x1={drop.x}
-          y1={center + size * 0.06}
-          x2={drop.x - size * 0.02}
-          y2={center + size * 0.18}
-          stroke="#38BDF8"
-          strokeWidth={size * 0.025}
-          strokeLinecap="round"
-          className="animate-rain"
-          style={{ animationDelay: `${drop.delay}s` }}
-        />
-      ))}
+      {weather === "stormy" && (
+        <>
+          <path
+            d="M17 14H6a5 5 0 0 1-.93-9.91A7 7 0 0 1 17.83 7H18a4 4 0 0 1 0 8z"
+            stroke={stroke}
+          />
+          <polyline points="13 16 11 20 15 20 13 24" stroke={stroke} />
+          <line x1="7" y1="17" x2="6" y2="20" stroke={stroke} />
+          <line x1="18" y1="17" x2="17" y2="20" stroke={stroke} />
+        </>
+      )}
     </svg>
   );
 }

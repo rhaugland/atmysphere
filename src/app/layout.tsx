@@ -1,27 +1,27 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
+import { Instrument_Serif, Outfit } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const instrumentSerif = Instrument_Serif({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const outfit = Outfit({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "atmysphere — Your Calendar as Weather",
+  title: "atmysphere",
   description:
-    "See your schedule at a glance. Busy days appear as storms, free days as sunshine. atmysphere transforms your calendar into an intuitive weather forecast.",
+    "Your calendar, visualized as weather. Busy days are storms. Free days are clear skies.",
   openGraph: {
-    title: "atmysphere — Your Calendar as Weather",
+    title: "atmysphere",
     description:
-      "See your schedule at a glance. Busy days appear as storms, free days as sunshine.",
+      "Your calendar, visualized as weather. Busy days are storms. Free days are clear skies.",
     type: "website",
   },
 };
@@ -34,9 +34,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${plusJakarta.variable} h-full antialiased`}
+      className={`${instrumentSerif.variable} ${outfit.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-white">{children}</body>
+      <body className="min-h-full flex flex-col antialiased">{children}</body>
     </html>
   );
 }
